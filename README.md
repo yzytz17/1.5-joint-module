@@ -125,7 +125,22 @@ Pin map (ESP32-C3):
 | Phase B (`INHB`) | **3** | originally GPIO7 — that pin is faulty on this board, so it moved |
 | Phase C (`INHC`) | 2 | |
 | Enable (`EN`) | 8 | |
-| Encoder (ADC) | 0 | analog voltage, 0–3.3 V ↔ 0–360° |
+| Encoder (ADC) | 0 | **PWM angle output**, read on the ADC — see below |
+
+> ## ⚠ The angle sensor speaks PWM, not I2C
+>
+> The magnetic angle sensor reports the closed-loop angle as a **PWM signal**
+> (duty cycle proportional to angle). It is read with the MCU's **ADC** on
+> GPIO0. **There is no I2C anywhere in this firmware** — do not wire SDA/SCL,
+> and do not go looking for an I2C address.
+>
+> This is the most common wiring mistake with magnetic angle sensors, because
+> I2C is the interface their datasheets lead with. Here it is the wrong one.
+>
+> The firmware's 8-sample ADC average is what turns PWM duty into a stable
+> angle: sampling a PWM signal asynchronously and averaging converges toward
+> its duty cycle. That average *is* the low-pass filter — there is no separate
+> filtering stage. After averaging, the signal behaves as 0–3.3 V ↔ 0–360°.
 
 Output is capped at `POWER_SUPPLY_VOLTAGE × VOLTAGE_LIMIT_RATIO` =
 **5 V × 15 % = 0.75 V**, which also protects the motor now that current

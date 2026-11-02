@@ -25,7 +25,7 @@
 | 8 | LED | 1 | `LED1` | **TODO** — colour / part |
 | 9 | Connector, 3-pin | 2 | `H1`, `H2` | **TODO** — pitch and part |
 | 10 | Header, 6-pin | 2 | `A-P-3-G`, `G-A-B-C` | **TODO** — pitch, and pinout (A/B/C/EN/encoder) |
-| 11 | Analog-output Hall angle sensor, 0–3.3 V ↔ 0–360° | 1 | off-board | **TODO** — part number. Firmware implies AS5600 (analog out), MT6701, or similar |
+| 11 | Magnetic angle sensor, **PWM output mode**, read on the MCU's ADC (not I2C) | 1 | off-board | **TODO** — part number and how PWM output mode is selected. AS5600/MT6701-class parts offer PWM among their output modes |
 | 12 | Solder paste + stencil | — | — | Both top and bottom paste layers exist; `U2`/`U4` are bottom-side. This is a two-sided reflow job |
 
 **Board cost:** the author's upstream LCEDA project is titled *"10元 1503 最小

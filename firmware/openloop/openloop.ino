@@ -41,6 +41,19 @@
 //    (Phase B was originally GPIO7; that pin has a hardware fault, so it
 //     was moved to GPIO3. All other wiring is unchanged.)
 //
+//  ★ THE ANGLE SENSOR SPEAKS PWM, NOT I2C ★
+//    The magnetic angle sensor reports the closed-loop angle as a **PWM
+//    signal** — duty cycle proportional to angle. It is read with the MCU's
+//    **ADC** on GPIO0. There is **no I2C transaction anywhere in this
+//    firmware**: do not wire SDA/SCL, and do not go looking for an I2C
+//    address. This is the single most common wiring mistake people make
+//    with magnetic angle sensors, because I2C is the interface their
+//    datasheets lead with.
+//    The 8-sample ADC average inside AnalogAngleSensor is what turns the
+//    PWM duty into a stable reading: sampling a PWM signal asynchronously
+//    and averaging converges toward its duty cycle. That average IS the
+//    low-pass filter — there is no separate filtering stage in software.
+//
 //  Output ceiling: POWER_SUPPLY_VOLTAGE * VOLTAGE_LIMIT_RATIO
 //                  = 5 V * 15 % = 0.75 V
 //                  (so the duty-cycle ceiling seen by the host is 15 %)
@@ -84,10 +97,13 @@ static float wrapAnglePi(float a) {
 }
 
 // ========================= analog-voltage angle sensor =========================
-// The encoder outputs an analog voltage with a fixed mapping:
+// The sensor's closed-loop angle output is **PWM** (duty proportional to
+// angle), read on the ADC — NOT I2C. After the 8-sample average below, the
+// PWM behaves as an equivalent voltage with a fixed mapping:
 // 0.0 V -> 0 deg, 3.3 V -> 360 deg.
-// Read the voltage with the ADC and convert to an angle. 8 samples are
-// averaged for noise rejection.
+// Read the (averaged) voltage with the ADC and convert to an angle. 8 samples
+// are averaged for noise rejection — and, because the source is PWM, that
+// averaging is also what recovers the duty cycle.
 class AnalogAngleSensor : public Sensor {
   public:
     AnalogAngleSensor(uint8_t pin) : _pin(pin) {}

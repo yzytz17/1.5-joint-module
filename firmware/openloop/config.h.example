@@ -115,10 +115,17 @@
 // ---------------------------------------------------------------------
 // 8. Analog angle sensor mapping  [DERIVED]
 //
-//    The encoder outputs an analog voltage with a fixed mapping:
+//    ★ THE SENSOR'S ANGLE OUTPUT IS PWM, NOT I2C ★
+//    The magnetic angle sensor reports the closed-loop angle as a PWM
+//    signal (duty cycle proportional to angle). It is read with the MCU's
+//    ADC on PIN_ENC_ANGLE. There is no I2C anywhere in this firmware — do
+//    not wire SDA/SCL and do not look for an I2C address.
+//
+//    The firmware's 8-sample ADC average converts the PWM duty into a
+//    stable equivalent voltage, which then maps linearly:
 //      0.0 V -> 0 deg,  3.3 V -> 360 deg
-//    The firmware averages 8 ADC samples per reading for noise rejection
-//    and clamps the result to [ANGLE_V_MIN, ANGLE_V_MAX].
+//    The firmware clamps the averaged result to
+//    [ANGLE_V_MIN, ANGLE_V_MAX].
 //
 //    Set ANGLE_MAP_INVERT to 1 to flip the mapping (3.3 V -> 0 deg,
 //    0 V -> 360 deg). Use it if the motor runs the wrong way.

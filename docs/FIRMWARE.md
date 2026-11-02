@@ -118,6 +118,49 @@ Consequence: **unplug the encoder and the motor still runs.** Plug it back
 in and nothing changes either. If you want real closed loop, that work has
 not been released yet (see [MISSING.md](MISSING.md)).
 
+### The sensor's interface is PWM, read on the ADC, not I2C
+
+The magnetic angle sensor's closed-loop angle output is a **PWM signal**:
+duty cycle proportional to angle. The firmware reads it with the **ADC** on
+GPIO0 (`PIN_ENC_ANGLE`). **There is no I2C transaction anywhere in this
+firmware.** Do not wire SDA/SCL, and do not go looking for an I2C address —
+you will find nothing, and the angle will never arrive.
+
+This deserves emphasis because it is the single most common mistake people
+make with magnetic angle sensors. Their datasheets lead with I2C (and SPI,
+and ABI), so a builder wires SDA/SCL and then wonders why the firmware reads
+a constant. On this board the sensor is configured for **PWM output**, and
+the read path is a single ADC pin.
+
+How a PWM signal becomes an angle with only an ADC:
+
+1. `AnalogAngleSensor::readVoltage()` takes **8 ADC samples** and averages
+   them (`analogReadMilliVolts`, 8×, divided by 8).
+2. Sampling a PWM signal asynchronously and averaging converges toward its
+   **duty cycle** — the average of many instantaneous captures of a 0/Vhigh
+   square wave is `duty × Vhigh`.
+3. That averaged value is then treated as a voltage and mapped linearly,
+   `ANGLE_V_MIN … ANGLE_V_MAX` ↔ 0–360°.
+
+So the 8-sample average is doing double duty: noise rejection *and* PWM
+demodulation. It **is** the low-pass filter; there is no separate filtering
+stage in software.
+
+Practical consequences:
+
+- **Resolution is limited by the averaging.** 8 samples of a PWM signal is a
+  coarse duty estimate. If you need finer angle resolution, either increase
+  the sample count, measure the PWM period/duty properly with a timer and
+  input capture, or switch the sensor to a different output mode — all of
+  which are firmware changes, not wiring changes.
+- **Do not assume an RC low-pass on the board.** Whether the PCB filters the
+  PWM into a true analog voltage before the ADC pin is not documented.
+  **TODO(author): confirm** — it changes how many ADC samples are needed.
+- **Scope it before debugging anything else.** If the angle reads a constant
+  or jumps wildly, put a scope on GPIO0 first. You should see a square wave
+  whose duty tracks the shaft. If you see a flat rail, the sensor is in the
+  wrong output mode or not powered.
+
 ### Open-loop position is a fiction
 
 `motor.shaft_angle` is an integrated counter, not a measurement. If the

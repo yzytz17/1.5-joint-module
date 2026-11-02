@@ -53,7 +53,7 @@ Recovered from `FlyingProbeTesting.json`. Layer `T` = top, `B` = bottom.
 | Ref | Pins | Layer | X (mil) | Y (mil) | Rot | Likely role |
 |---|---|---|---|---|---|---|
 | `U1` | 26 | T | 1.63 | 0.64 | 270° | **MP6540GU** — 26 pins matches its QFN-26 package exactly |
-| `U2` | 8 | B | 0 | 0 | 270° | likely the analog angle sensor (SOIC-8, AS5600-class); bottom side would face the rotor magnet. **TODO(author): confirm** |
+| `U2` | 8 | B | 0 | 0 | 270° | likely the magnetic angle sensor (SOIC-8, AS5600/MT6701-class) in **PWM output mode**; bottom side would face the rotor magnet. **TODO(author): confirm** |
 | `U3` | 3 | T | −160 | 235 | 0° | **TODO(author)** |
 | `U4` | 3 | B | 11.44 | −206.44 | 0° | **TODO(author)** |
 | `H1` | 3 | T | −243.37 | 55.64 | 90° | connector — **TODO(author)** |
@@ -242,9 +242,14 @@ mirrored into this repository.**
 3. **Header pinouts** — which pin of the two 6-pin headers is A/B/C/EN/encoder
 4. **Layer stackup** — 4-layer, but the stackup is unspecified
 5. **Pick-and-place / stencil files** for SMT assembly
-6. **Encoder part number** — the firmware reads an analog voltage 0–3.3 V
-   mapped to 0–360°, which is characteristic of a Hall-effect angle sensor
-   (AS5600 in analog-out mode, MT6701, or similar), but nothing names it
+6. **Encoder part number and output-mode configuration** — the sensor's angle
+   output is **PWM**, read on the ADC (GPIO0); there is no I2C in the firmware.
+   That points at a magnetic angle sensor configured for PWM output
+   (AS5600/MT6701-class parts offer PWM among their output modes), but nothing
+   names the part or says how its output mode was selected (strap pins?
+   one-time OTP?). Both matter: the same part in I2C mode would produce
+   exactly the "reads a constant" symptom described in
+   [FIRMWARE.md](FIRMWARE.md#the-sensors-interface-is-pwm-read-on-the-adc-not-i2c)
 7. **The closed-loop board revision** — the Gerber is named *"gen 1 ADC closed
    loop"*, implying there is a closed-loop design and firmware, neither of
    which was released
