@@ -100,6 +100,17 @@ whether there should be a fifth rod.**
 > naming; `类曲柄输出` → "crank output" and `零件1` → "part1_rod" are
 > guesses at function from measured geometry. Please correct any that are
 > wrong — especially `零件1`, which is the least descriptive name in the set.
+>
+> **Two translations are known to lose meaning**, recorded here so nobody is
+> misled:
+>
+> - `类曲柄输出` → "crank output" drops the `类` (*-like*). The part is
+>   **crank-like**, not a true crank — it is a 4-pin wobble/eccentric output
+>   stage. If you have a proper English term for the mechanism, it should
+>   replace this name everywhere.
+> - `神秘中间传递` → "mystery intermediate driver" preserves your joke but
+>   reads like a real engineering term in English. An English reader may
+>   search for it and find nothing.
 
 ## Three CAD parts have no STL
 

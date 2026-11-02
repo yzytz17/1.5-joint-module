@@ -2,6 +2,16 @@
 
 **English** | [中文](README.zh-CN.md)
 
+> **Language policy.** English is the public face of this repository. Chinese
+> is the author's working language and is kept in full at
+> [`README.zh-CN.md`](README.zh-CN.md) and in
+> [`firmware/openloop-zh/`](firmware/openloop-zh/).
+>
+> Where a load-bearing statement exists in both languages, **the Chinese
+> original is authoritative** — English is a translation and can lose emphasis
+> or nuance. Part numbers, pin numbers and measured dimensions are
+> language-neutral and identical in both.
+
 > An ultra-low-cost robotic joint module: a ~$1.5 four-layer FOC driver board
 > that fits inside a 1503 brushless gimbal motor, driving a fully 3D-printed
 > high-ratio precision gearbox. **Cheap actuation, precise motion.**

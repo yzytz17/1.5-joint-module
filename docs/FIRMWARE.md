@@ -140,6 +140,21 @@ cooking itself at full open-loop voltage. Both values are guesses right now.
 
 ## Serial protocol
 
+> **⚠ The two firmware versions speak different protocols.**
+>
+> The original (`openloop-zh/开环代码.ino`) prefixes its output with Chinese
+> mode names: `[位置环]`, `[速度环]`, `[磁编码器]`. The English version
+> (`openloop/openloop.ino`) uses `[POS]`, `[VEL]`, `[ENC]`.
+>
+> These prefixes are a **protocol**, not decoration — a host program that
+> demultiplexes on them will not understand the other language. If you have
+> existing host software (上位机) parsing the Chinese prefixes, flash
+> `openloop-zh/`, not the English version. If you are writing new host
+> software, pick one and stick to it.
+>
+> Commands are identical in both versions (`D`, `R2`, `a 90`, `o`, `q`, bare
+> numbers). Only the output prefixes differ.
+
 115200 baud. Commands are line-terminated (`\n` or `\r`).
 
 ### Commands

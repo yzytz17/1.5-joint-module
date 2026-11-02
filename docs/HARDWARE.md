@@ -156,9 +156,12 @@ the failure mode is silent: **MP6540GU and MP6540HGU share the same QFN-26
 pass visual inspection, and still not be the part this board was designed
 around.
 
-From the author's `注意事项.docx` ("Notes"), translated verbatim:
+From the author's `注意事项.docx` ("Notes"). Original Chinese, then the
+translation — the Chinese is authoritative:
 
-> **The MCU/driver must be purchased as MP6540GU.**
+> 原文：**单片机一定采购MP 6540 GU**
+>
+> Translation: **The MCU/driver must be purchased as MP6540GU.**
 
 ### The two parts, side by side
 
@@ -182,7 +185,18 @@ H part is simply the higher-voltage, higher-current sibling.
 
 ### Why the non-H part is the correct one
 
-The author's reasoning, in their own terms:
+The author's statement, in the original Chinese (authoritative), then
+translated:
+
+> 原文：**选用非H版本原因是因为降低价格，并且H版本提升的电流在FOC项目中没有
+> 太高意义，因为这个电机的KV值太高了，高电流会影响整个电机的稳定性。**
+>
+> Translation: the non-H version was chosen to lower the price, and the extra
+> current the H version provides has little meaning in a FOC project like this
+> one, because this motor's KV is too high — high current affects the
+> stability of the whole motor.
+
+Expanded:
 
 1. **Price.** The non-H part is cheaper, and cost is the entire premise of
    this project.
