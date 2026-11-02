@@ -113,12 +113,18 @@ working gearbox and a box of failed prints.
 **Ask:** settings per part, plus which printer. And whether the external ring
 gear is printed in plastic or metal.
 
-### 8. Still photos (video is now covered)
+### 8. Photos and video
 
-~~`assets/` is empty.~~ **Partially resolved.** Three intro videos are now
-linked from both READMEs via the author's Baidu NetDisk share, with poster
-frames committed under `assets/video/`. The third video shows the assembled
-unit in hand, which covers the "does it exist" question.
+`assets/` contains no images and no video.
+
+Demo video does exist — the author has recorded three clips (a bench demo, a
+SolidWorks walkthrough of the gearbox, and the assembled unit in hand) — but
+none of it is in the repository. At roughly 100 MB combined the files were
+judged too heavy to commit, and they are not on the Baidu NetDisk mirror
+either. So a reader still cannot see the joint move.
+
+**Ask:** host them somewhere linkable (Bilibili, YouTube, or a GitHub Release
+asset) and add the links — or accept the size and commit them.
 
 What is still absent is any *still* image of the internals:
 

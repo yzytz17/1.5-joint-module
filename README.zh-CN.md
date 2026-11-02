@@ -71,7 +71,7 @@ PCB Gerber、驱动固件、SolidWorks 源文件和可打印 STL 全部开源。
 >    扭矩，只会变成热量、并影响整颗电机的稳定性。所以低电流版本是**正确
 >    选择**，不是妥协。
 >
-> 详见 [`docs/HARDWARE.md`](docs/HARDWARE.md#驱动芯片mp6540gu而非-mp6540hgu)。
+> 详见 [`docs/HARDWARE.md`](docs/HARDWARE.md#the-driver-chip-mp6540gu-not-mp6540hgu)。
 
 上游可编辑工程：[10元 1503 最小 FOC — 立创开源硬件平台](https://oshwhub.com/team_dvojhors/project_ceehsgzu)
 
