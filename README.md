@@ -2,9 +2,19 @@
 
 **English** | [中文](README.zh-CN.md)
 
+> An ultra-low-cost robotic joint module: a ~$1.5 four-layer FOC driver board
+> that fits inside a 1503 brushless gimbal motor, driving a fully 3D-printed
+> high-ratio precision gearbox. **Cheap actuation, precise motion.**
+
 A tiny robotic joint built from three cheap things: a **1503 brushless gimbal
 motor**, a **~$1.5 four-layer FOC driver board** that fits inside the motor
 bell, and a **fully 3D-printed reduction gearbox**.
+
+The point is the cost floor. A four-layer driver board at prototype pricing is
+about **$1.5**, and the entire gear train prints on a machine that already
+sits on your desk. That combination is what makes inexpensive actuation
+practical at scale — a six-degree-of-freedom arm, a quadruped, a pan-tilt
+head — without giving up reduction ratio or positioning resolution.
 
 Everything here is open: PCB Gerbers, drive firmware, SolidWorks CAD and
 print-ready STL.
