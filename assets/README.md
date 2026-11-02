@@ -7,7 +7,7 @@ Poster frames for the three intro videos, plus a place for still photos.
 | File | What it shows |
 |---|---|
 | `video/01-bench-demo-poster.jpg` | the board driving the motor on the bench, with the author's title overlay: *"开源 / 十元 foc（无刷电机闭环）/ 谁都用得起"* |
-| `video/02-cad-walkthrough-10x-reduction-poster.jpg` | the gearbox in **SOLIDWORKS Design Premium 2025 SP3.0**, overlay: *"Foc 单级十倍减速 / 可 3D 打印，适配 1503 foc"* |
+| `video/02-cad-walkthrough-10x-reduction-poster.jpg` | the gearbox in SolidWorks — the title bar in this recording reads *Design Premium 2025 SP3.0*, while the author's current toolchain is 2026 — overlay: *"Foc 单级十倍减速 / 可 3D 打印，适配 1503 foc"* |
 | `video/03-assembled-joint-in-hand-poster.jpg` | the finished joint held in hand, overlay: *"全网最便宜 / 十元 foc 关节带减速器 / 2 元减速 / 开源"* |
 
 The posters are the frames GitHub shows in the README table. They also happen

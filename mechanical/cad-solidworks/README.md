@@ -4,15 +4,25 @@
 exports live in [`../stl/`](../stl/).
 
 > **These are native SolidWorks files** (`.SLDPRT` / `.SLDASM`). They require
-> SolidWorks to open. The author's own CAD walkthrough video shows
-> **SOLIDWORKS Design Premium 2025 SP3.0** in the title bar, so that is the
-> version these were saved with — and SolidWorks will not open a file saved by
-> a *newer* version, so if yours is older than 2025 SP3.0 you are out of luck.
+> SolidWorks to open. The author's toolchain is **SolidWorks 2026**
+> (author-stated). Note that the CAD walkthrough video's title bar reads
+> *SOLIDWORKS Design Premium 2025 SP3.0*, so at least some of this material was
+> produced on 2025 before an upgrade.
 >
-> **TODO(author):** which SolidWorks release are these saved as? Consider also
-> exporting a neutral format (`STEP` AP214) so the CAD is usable without a
-> SolidWorks licence. STEP files are also what most machining and metal-print
-> services want.
+> The exact version each committed file was last **saved** with could not be
+> read from the bytes: modern `.SLDPRT` is a proprietary encrypted container
+> (neither OLE nor zip), so the version is not visible without opening it in
+> SolidWorks. **TODO(author): confirm via File → Properties.**
+>
+> This matters because SolidWorks is **forward-compatible only**: a file saved
+> by a newer release cannot be opened by an older one. If your SolidWorks is
+> older than the release these were saved with, you are out of luck — which is
+> exactly why a neutral export is recommended below.
+>
+> **TODO(author):** export a neutral format (`STEP` AP214) alongside these.
+> It removes the version problem entirely, makes the CAD usable without a
+> SolidWorks licence, and is what most machining and metal-print services ask
+> for anyway.
 
 ## Files
 
@@ -51,8 +61,10 @@ See [`../../docs/MISSING.md`](../../docs/MISSING.md) item 10.
 
 ## What is not documented
 
-- **SolidWorks version** — resolved: **2025 SP3.0**, read off the title bar in
-  the author's CAD walkthrough video
+- **SolidWorks version** — author's toolchain is **2026**; an earlier
+  recording shows 2025 SP3.0. The exact saved-version of each committed file
+  is not readable from the bytes (encrypted container) — confirm via
+  File → Properties
 - **No STEP / IGES export** — blocks anyone without a SolidWorks licence
 - **No drawings** — no dimensioned 2D views, so nothing can be machined
   conventionally instead of printed
