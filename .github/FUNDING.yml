@@ -1,0 +1,46 @@
+# ---------------------------------------------------------------------------
+#  Sponsor button for this repository.
+#
+#  Adding this file makes a "Sponsor" button appear at the top of the repo,
+#  next to Watch / Star / Fork. GitHub reads it automatically from the default
+#  branch — no settings toggle needed.
+#
+#  Valid keys (verified against GitHub's current docs):
+#    github, patreon, open_collective, ko_fi, tidelift, community_bridge,
+#    liberapay, issuehunt, polar, buy_me_a_coffee, thanks_dev, custom
+#  `custom` accepts a list of up to FOUR URLs.
+#
+#  Uncomment and fill in whichever you actually have. Leave the rest commented:
+#  a key with an empty value makes GitHub ignore the whole file.
+# ---------------------------------------------------------------------------
+
+# In-repo sponsor page: shows the Alipay / WeChat QR codes and explains the
+# options. This works with no third-party account at all, which is why it is
+# the only line enabled by default.
+custom:
+  - https://github.com/yzytz17/1.5-joint-module/blob/main/assets/sponsor/README.md
+
+# --- China-friendly options -------------------------------------------------
+# 爱发电 (Afdian) — supports Alipay and WeChat, no overseas bank account needed.
+# Put it in `custom` alongside the link above (max 4 URLs total).
+# custom:
+#   - https://afdian.com/a/YOUR_HANDLE
+
+# --- International options (need PayPal or Stripe) --------------------------
+# ko_fi:            yourhandle          # Ko-fi — PayPal, no platform fee on one-off tips
+# buy_me_a_coffee:  yourhandle          # Buy Me a Coffee — Stripe or PayPal
+# liberapay:        yourhandle          # Liberapay — recurring, non-profit platform
+# patreon:          yourhandle          # Patreon — recurring, takes a large cut
+# open_collective:  your-project        # Open Collective — fiscal-host model
+
+# --- NOT usable for payouts from mainland China -----------------------------
+# `github:` enables the native GitHub Sponsors button. Anyone in the world can
+# SPONSOR through it, but you must be RESIDENT in a supported region to RECEIVE
+# the money. GitHub's official region list includes Hong Kong SAR and Macau SAR
+# but NOT mainland China, and payouts run through Stripe, which does not
+# onboard mainland-China individuals for this.
+#
+# So do not enable this unless you have a bank account and residence in a
+# supported region — otherwise the button appears, people click it, and you
+# cannot be paid.
+# github: yzytz17

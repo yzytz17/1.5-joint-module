@@ -273,6 +273,34 @@ The headline gaps:
 
 ---
 
+## Support this project
+
+**Open source earns nothing.** Everything here is free and will stay free.
+
+But it cost real time: board revisions, a gearbox printed and re-printed, and
+firmware debugged pin by pin — including finding out the hard way that GPIO7
+on this board is damaged and moving phase B to GPIO3.
+
+If this project saved you time or money, consider buying me the board it is
+named after:
+
+> **$1.50 — the price of one bare four-layer PCB.**
+
+A tip of ¥10–20 (roughly $1.50–$3) is more than enough. No tier, no reward,
+no obligation.
+
+QR codes and international options: [`assets/sponsor/README.md`](assets/sponsor/README.md)
+
+The native GitHub Sponsor button is deliberately **not** enabled — anyone can
+give through it, but receiving requires residence in a supported region, and
+payouts run through Stripe. Details in the sponsor page.
+
+**Ways to help that cost nothing, and matter more:** build one and report what
+broke · send the files listed in [`docs/MISSING.md`](docs/MISSING.md) · star
+the repo · open an issue · send a PR.
+
+---
+
 ## License
 
 **MIT** — see [`LICENSE`](LICENSE).
