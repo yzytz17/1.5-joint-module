@@ -60,9 +60,33 @@ Board facts read directly out of the released Gerbers:
   (3-pin connectors), two 6-pin headers, `LED1`, `R1`–`R4`, `C1`–`C9`,
   `PAD1`–`PAD3` (motor phases)
 
-> **Critical purchasing note from the author:** the gate driver must be the
-> **MP6540GU** package variant specifically. Other MP6540 package markings
-> are not interchangeable here.
+> ## ⚠️ The driver chip must be **MP6540GU** — *not* MP6540**H**GU
+>
+> This is the single most important purchasing instruction in the whole
+> project, and it is easy to get wrong, because **the two parts share the same
+> QFN-26 (5 × 5 mm) footprint**. A wrongly-bought MP6540HGU will still solder
+> down perfectly and still not be what this board was designed around.
+>
+> | | **MP6540GU** (this board) | MP6540HGU (wrong for this board) |
+> |---|---|---|
+> | Family | MP6540 / MP6540A | MP6540H / MP6540HA |
+> | Supply voltage | 5.5 – **35 V** | 5.5 – **50 V** |
+> | Continuous current | **3 A** | **5 A** |
+> | Peak current | **10 A** (1 s) | **6 A** |
+> | Package | QFN-26 (5 × 5) | QFN-26 (5 × 5) — identical |
+>
+> **Why the non-H part, in the author's own reasoning:**
+>
+> 1. **It is cheaper**, and cost is the entire point of this project.
+> 2. The H version's extra current headroom **earns nothing in a FOC drive
+>    like this one** — the firmware is voltage-limited, so the extra amperes
+>    are never used.
+> 3. **This motor's KV is high.** With a high-KV winding, excess available
+>    current does not produce more useful torque; it produces heat and
+>    destabilises the whole motor. The lower-current part is the *correct*
+>    part, not a compromise.
+>
+> Full detail: [`docs/HARDWARE.md`](docs/HARDWARE.md#the-driver-chip-mp6540gu-not-mp6540hgu).
 
 The full editable project lives on the LCEDA/OSHWHub platform:
 [10元 1503 最小 FOC — OSHWHub](https://oshwhub.com/team_dvojhors/project_ceehsgzu)
@@ -266,34 +290,40 @@ The headline gaps:
    an external OSHWHub link
 4. **Real BOM with part numbers** — the board's `U1`–`U4` and all passive
    values are unknown
-5. **Photos and video** — `assets/` is empty
+5. **Still photos** — three intro videos are linked via the author's NetDisk
+   share, but there is no still image of the bare PCB or the gear train
 6. **Print settings** — material, layer height, infill, supports, and
    whether the ring gear is printed in metal or resin
-7. **Reduction ratio** and kinematic description
+7. **Kinematic description** — the ratio is known (**10:1, single stage**,
+   from the author's own video), but how the stages connect is not
 
 ---
 
-## Support this project
+## Full archive mirror
 
-**Open source earns nothing.** Everything here is free and will stay free.
+GitHub can be slow or unreachable from mainland China, so the author also
+hosts the complete material set on Baidu NetDisk:
 
-But it cost real time: board revisions, a gearbox printed and re-printed, and
-firmware debugged pin by pin — including finding out the hard way that GPIO7
-on this board is damaged and moving phase B to GPIO3.
+> **百度网盘 / Baidu NetDisk:**
+> <https://pan.baidu.com/s/11fmlISdtuOBgRAKb2E5Nxg?pwd=RRRR>
+> Extraction code / 提取码: **RRRR**
 
-If this project saved you time or money, consider buying me the board it is
-named after:
+This is the same material as this repository, as one zip. Use whichever is
+faster for you. If the two ever disagree, **this repository is the source of
+truth** — the mirror is a convenience copy and may lag behind.
 
-> **$1.50 — the price of one bare four-layer PCB.**
+## Tipping
 
-A tip of ¥10–20 (roughly $1.50–$3) is more than enough. No tier, no reward,
-no obligation.
+There is no donation button, no QR code and no sponsorship account, and there
+won't be. This project is free and stays free.
 
-QR codes and international options: [`assets/sponsor/README.md`](assets/sponsor/README.md)
+If it saved you time or money and you would like to say thanks with money
+anyway, the author's preference is simple:
 
-The native GitHub Sponsor button is deliberately **not** enabled — anyone can
-give through it, but receiving requires residence in a supported region, and
-payouts run through Stripe. Details in the sponsor page.
+> **Send the author a private message, or leave a comment.**
+
+That is the whole mechanism. A message telling you what you built with it is
+worth more than the money would be.
 
 **Ways to help that cost nothing, and matter more:** build one and report what
 broke · send the files listed in [`docs/MISSING.md`](docs/MISSING.md) · star

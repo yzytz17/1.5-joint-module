@@ -4,9 +4,10 @@
 exports live in [`../stl/`](../stl/).
 
 > **These are native SolidWorks files** (`.SLDPRT` / `.SLDASM`). They require
-> SolidWorks to open, and the version is unknown — SolidWorks will not open a
-> file saved by a *newer* version, so if yours is older than the author's you
-> are out of luck.
+> SolidWorks to open. The author's own CAD walkthrough video shows
+> **SOLIDWORKS Design Premium 2025 SP3.0** in the title bar, so that is the
+> version these were saved with — and SolidWorks will not open a file saved by
+> a *newer* version, so if yours is older than 2025 SP3.0 you are out of luck.
 >
 > **TODO(author):** which SolidWorks release are these saved as? Consider also
 > exporting a neutral format (`STEP` AP214) so the CAD is usable without a
@@ -50,7 +51,8 @@ See [`../../docs/MISSING.md`](../../docs/MISSING.md) item 10.
 
 ## What is not documented
 
-- **SolidWorks version** — needed to know whether a given user can open these
+- **SolidWorks version** — resolved: **2025 SP3.0**, read off the title bar in
+  the author's CAD walkthrough video
 - **No STEP / IGES export** — blocks anyone without a SolidWorks licence
 - **No drawings** — no dimensioned 2D views, so nothing can be machined
   conventionally instead of printed

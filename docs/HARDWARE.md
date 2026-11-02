@@ -52,8 +52,8 @@ Recovered from `FlyingProbeTesting.json`. Layer `T` = top, `B` = bottom.
 
 | Ref | Pins | Layer | X (mil) | Y (mil) | Rot | Likely role |
 |---|---|---|---|---|---|---|
-| `U1` | 26 | T | 1.63 | 0.64 | 270° | main controller — **TODO(author)**: ESP32-C3 module? |
-| `U2` | 8 | B | 0 | 0 | 270° | **TODO(author)**: MP6540GU gate driver? |
+| `U1` | 26 | T | 1.63 | 0.64 | 270° | **MP6540GU** — 26 pins matches its QFN-26 package exactly |
+| `U2` | 8 | B | 0 | 0 | 270° | likely the analog angle sensor (SOIC-8, AS5600-class); bottom side would face the rotor magnet. **TODO(author): confirm** |
 | `U3` | 3 | T | −160 | 235 | 0° | **TODO(author)** |
 | `U4` | 3 | B | 11.44 | −206.44 | 0° | **TODO(author)** |
 | `H1` | 3 | T | −243.37 | 55.64 | 90° | connector — **TODO(author)** |
@@ -64,6 +64,25 @@ Recovered from `FlyingProbeTesting.json`. Layer `T` = top, `B` = bottom.
 | `PAD1`–`PAD3` | — | T | see above | | | motor phases A/B/C |
 | `A-P-3-G` | 6 | | | | | 6-pin header — **TODO(author)** |
 | `G-A-B-C` | 6 | | | | | 6-pin header — **TODO(author)** |
+
+### The microcontroller is probably not on this board
+
+Once `U1` is identified as the MP6540GU (26 pins = QFN-26), no remaining
+placement has enough pins to be an ESP32-C3. A bare ESP32-C3 is QFN-32 or
+QFN-48; a module is 20–40+ pins. The largest thing left is `U2` at 8 pins.
+
+So the board is most likely **power stage + angle sensor + passives only**,
+with the ESP32-C3 sitting on an off-board development module wired in through
+the two 6-pin headers. That reading also explains the price: a ¥10 board is
+plausible for a driver + sensor, not for a driver + sensor + MCU.
+
+It also gives a plausible reading of the header names: `G-A-B-C` looks like
+**G(nd) – A – B – C**, i.e. ground plus the three phase PWM lines, and
+`A-P-3-G` may carry the remaining control and encoder signals.
+
+> **TODO(author):** confirm. If the MCU really is off-board, document which
+> header carries what — that mapping is currently the single biggest gap
+> between "Gerbers" and "a board someone can populate and run".
 
 The two 6-pin headers are almost certainly **motor phases + encoder**, but
 nothing in the released material says which pin is which. The firmware
@@ -129,21 +148,59 @@ a hot plate or oven on the bottom side, not just hand soldering.
 
 ---
 
-## Critical component note
+## The driver chip: MP6540GU, not MP6540HGU
+
+This is the load-bearing purchasing instruction for the entire project, and
+the failure mode is silent: **MP6540GU and MP6540HGU share the same QFN-26
+(5 × 5 mm) footprint.** A wrongly-bought H part will solder down perfectly,
+pass visual inspection, and still not be the part this board was designed
+around.
 
 From the author's `注意事项.docx` ("Notes"), translated verbatim:
 
 > **The MCU/driver must be purchased as MP6540GU.**
 
-MP6540 is Monolithic Power Systems' three-phase BLDC gate driver with
-integrated power FETs. The `GU` suffix denotes a specific package variant, and
-the author's emphasis ("一定", i.e. *must / definitely*) suggests other
-MP6540 package markings are **not** drop-in compatible with this footprint.
+### The two parts, side by side
 
-> **TODO(author):** confirm which of `U1`–`U4` is the MP6540GU, and supply the
-> full part number as ordered (e.g. `MP6540GU-Z` or similar suffix), plus the
-> supplier. Also confirm whether `U1` really is the ESP32-C3, and if so which
-> module.
+Values from the manufacturers' and distributors' published specifications.
+
+| | **MP6540GU** — this board | MP6540HGU — wrong for this board |
+|---|---|---|
+| Family | MP6540 / MP6540A | MP6540H / MP6540HA |
+| Description | 35 V, 3 A three-phase power stage | 50 V, 5 A three-phase power stage |
+| Supply voltage | 5.5 – **35 V** | 5.5 – **50 V** |
+| Continuous current | **3 A** | **5 A** |
+| Peak current | **10 A** for 1 s | **6 A** |
+| RDS(on), HS + LS | 50 mΩ | 45 – 50 mΩ (sources disagree) |
+| Package | **QFN-26 (5 × 5 mm)** | **QFN-26 (5 × 5 mm)** — identical |
+| LCSC part number | C5676249 (`MP6540GU-Z`) | C5358239 (`MP6540HGU-Z`) |
+
+Both integrate three half-bridges of N-channel power MOSFETs, the pre-driver,
+the gate-drive supply and a bidirectional current-sense amplifier. Both use an
+internal charge pump for 100 % duty cycle. Electrically they are siblings; the
+H part is simply the higher-voltage, higher-current sibling.
+
+### Why the non-H part is the correct one
+
+The author's reasoning, in their own terms:
+
+1. **Price.** The non-H part is cheaper, and cost is the entire premise of
+   this project.
+2. **The extra current buys nothing here.** This firmware is *voltage*-limited
+   (`VOLTAGE_LIMIT` = 0.75 V of a 5 V bus, and current sensing was deliberately
+   removed). The H part's 5 A continuous rating is headroom this design never
+   touches.
+3. **The motor's KV is high.** With a high-KV winding, surplus available
+   current does not become useful torque — it becomes heat, and it
+   destabilises the motor as a whole. In this application the lower-current
+   part is the *right* part, not a cost-cutting compromise.
+
+Point 3 is the one worth internalising: for a high-KV gimbal-class motor
+driven open loop at a fraction of a volt, current capability is not a feature.
+It is a liability you would be paying extra for.
+
+> **TODO(author):** confirm the full ordering code you used (e.g.
+> `MP6540GU-Z` vs `-P`) and the supplier, so the BOM is reproducible exactly.
 
 ---
 

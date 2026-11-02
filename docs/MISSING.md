@@ -78,9 +78,13 @@ analog-out mode or an MT6701, but that is inference.
 The MP6540GU requirement *is* documented, which is good. It is the only
 component in the whole project that is.
 
-### 6. Reduction ratio and kinematic description
+### 6. Kinematic description (the ratio itself is now known)
 
-Nothing states the gear ratio. What can be measured:
+~~Nothing states the gear ratio.~~ **Resolved from the author's own video:**
+the middle intro video is titled *"Foc 单级十倍减速"* — **single stage, 10:1**.
+That number is now in both READMEs.
+
+What is still missing is the *explanation*. What can be measured:
 
 - internal ring gear, module 0.6, **27T**
 - external ring gear, module 0.6, **30T**
@@ -96,7 +100,8 @@ mesh with each other directly**, so there must be an intermediate stage. But
 the scheme (planetary? cycloidal? wobble/scotch-yoke?) and the resulting ratio
 are not recoverable from the files.
 
-**Ask:** the ratio, and one paragraph describing how the stages connect.
+**Ask:** one paragraph describing how the stages connect. The ratio (10:1,
+single stage) is settled; the *mechanism* is not.
 
 ### 7. Print settings
 
@@ -108,18 +113,21 @@ working gearbox and a box of failed prints.
 **Ask:** settings per part, plus which printer. And whether the external ring
 gear is printed in plastic or metal.
 
-### 8. Photos and video
+### 8. Still photos (video is now covered)
 
-`assets/` is empty. There is no image of the assembled joint anywhere in the
-material set.
+~~`assets/` is empty.~~ **Partially resolved.** Three intro videos are now
+linked from both READMEs via the author's Baidu NetDisk share, with poster
+frames committed under `assets/video/`. The third video shows the assembled
+unit in hand, which covers the "does it exist" question.
+
+What is still absent is any *still* image of the internals:
 
 **Ask:**
-- assembled joint, a few angles
-- the bare PCB, top and bottom
-- the PCB installed inside the motor
-- the printed gear train before assembly
-- **a video of it running** — this is the single most persuasive thing a
-  project like this can have, and it is currently absent
+- the bare PCB, top and bottom — the single most useful photo for anyone
+  trying to populate the board, since there is no schematic
+- the PCB installed inside the motor bell, showing the radial phase pads
+- the printed gear train laid out before assembly
+- a labelled photo of the two 6-pin headers
 
 ### 9. Cost breakdown
 
@@ -220,8 +228,9 @@ If you only send five things, send these:
 - [ ] **`config.h`** (the real one)
 - [ ] **schematic PDF**, or a labelled photo of the two 6-pin headers
 - [ ] **PAD1/2/3 → motor phase → GPIO mapping**
-- [ ] **reduction ratio** + one paragraph on how the gear stages connect
-- [ ] **photos and a video** of the joint running
+- [ ] **one paragraph on how the gear stages connect** (the 10:1 ratio is
+      already known from your video; the mechanism is not)
+- [ ] **still photos** of the bare PCB and the gear train (video is covered)
 
 Those five turn this from "an archive of files" into "a project someone can
 actually build".
