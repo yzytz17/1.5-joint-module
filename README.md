@@ -37,6 +37,30 @@ print-ready STL.
 
 ---
 
+## See it work
+
+Three short videos recorded by the author. The frames below are poster
+images kept in the repo; **the videos themselves live on Baidu NetDisk**
+(~100 MB total is too heavy to force on everyone who clones):
+
+> **Videos / 介绍视频:**
+> <https://pan.baidu.com/s/1f1OeAkVNAqZQWN0Y5FbujQ?pwd=ge5x>
+> Extraction code / 提取码: **ge5x**
+
+| | | |
+|:---:|:---:|:---:|
+| ![Bench demo](assets/video/01-bench-demo-poster.jpg) | ![CAD walkthrough](assets/video/02-cad-walkthrough-10x-reduction-poster.jpg) | ![Assembled joint](assets/video/03-assembled-joint-in-hand-poster.jpg) |
+| **Bench demo** — the board driving the motor on the bench. *"Open source. 10-yuan FOC. Brushless closed loop. Affordable for anyone."* | **CAD walkthrough** — the gearbox in SolidWorks. *"Single-stage 10× reduction. 3D-printable. Fits the 1503 FOC."* | **Assembled joint** — the finished unit in hand. *"Cheapest on the internet: 10-yuan FOC joint with a 2-yuan reducer."* |
+
+The middle video is where the reduction ratio comes from: **single stage,
+10:1**. The third is where the gearbox cost comes from: **about ¥2 (~$0.28)
+of printed plastic**, on top of the ¥10 (~$1.40) board.
+
+> Baidu NetDisk needs an account and is slowest outside China. If you cannot
+> reach it, open an issue and the author can send the files another way.
+
+---
+
 ## What is in the box
 
 | Layer | Contents | Path |

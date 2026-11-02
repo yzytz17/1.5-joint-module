@@ -28,6 +28,28 @@ PCB Gerber、驱动固件、SolidWorks 源文件和可打印 STL 全部开源。
 
 ---
 
+## 先看它跑起来
+
+作者自录的三段短视频。下面是留在仓库里的封面图，**视频本体在百度网盘**
+（共约 100 MB，不该让每个克隆的人都背这个体积）：
+
+> **介绍视频：**
+> <https://pan.baidu.com/s/1f1OeAkVNAqZQWN0Y5FbujQ?pwd=ge5x>
+> 提取码：**ge5x**
+
+| | | |
+|:---:|:---:|:---:|
+| ![台架演示](assets/video/01-bench-demo-poster.jpg) | ![CAD 讲解](assets/video/02-cad-walkthrough-10x-reduction-poster.jpg) | ![整机上手](assets/video/03-assembled-joint-in-hand-poster.jpg) |
+| **台架演示** —— 板子在台架上驱动电机。*"开源，十元 foc（无刷电机闭环），谁都用得起。"* | **CAD 讲解** —— SolidWorks 里的减速箱。*"Foc 单级十倍减速，可 3D 打印，适配 1503 foc。"* | **整机上手** —— 成品拿在手里。*"全网最便宜：十元 foc 关节带减速器，2 元减速。"* |
+
+中间那段给出了减速比：**单级 10:1**。第三段给出了减速箱成本：**约 2 元的
+打印件**，加上 10 元的板子。
+
+> 百度网盘需要登录，海外访问较慢。打不开的话开个 Issue，作者可以换个方式
+> 发文件。
+
+---
+
 ## 仓库内容
 
 | 层 | 内容 | 路径 |
