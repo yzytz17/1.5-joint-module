@@ -215,15 +215,18 @@ bearing designations (MR117 / 6701, MR85) are documented in
 [BOM.md](BOM.md) as the international-friendly substitute, but the rod and
 motor still have no durable sourcing info.
 
-### 19. License and attribution
+### 19. Attribution name (licence itself is resolved)
 
-The repo currently ships **MIT**, chosen as a safe default and **not
-confirmed**. For hardware, CERN-OHL-S or CERN-OHL-W would cover the PCB and
-mechanical design explicitly rather than treating everything as software.
+~~The repo currently ships MIT, unconfirmed.~~ **Resolved: CERN-OHL-W-2.0**,
+chosen by the author over CERN-OHL-S so that people can embed the joint in
+closed products while the joint itself stays open. Full text in
+[`../LICENSE`](../LICENSE); plain-terms summary in both READMEs.
 
-Also needed: the name or handle to credit, and the copyright line for
-`LICENSE`. The repo is staged under the git identity
-`yzytz17 <lsb6699@qq.com>`.
+What is still open is only the **name**: the copyright line currently reads
+`Copyright (c) 2026 yzytz17`, taken from the git identity
+`yzytz17 <lsb6699@qq.com>`. If you want a different name, handle or entity in
+the copyright line and the credits section, say so and it is a one-line
+change everywhere.
 
 ---
 

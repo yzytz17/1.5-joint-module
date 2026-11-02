@@ -279,5 +279,26 @@ GitHub 在国内访问可能慢或不通，所以作者同时把完整资料放�
 
 ## 许可
 
-**MIT** —— 见 [`LICENSE`](LICENSE)。**此选择尚未由作者确认**，
-硬件项目可考虑换成 CERN-OHL。
+**CERN Open Hardware Licence Version 2 – Weakly Reciprocal
+（CERN-OHL-W-2.0）** —— 全文见 [`LICENSE`](LICENSE)。SPDX：`CERN-OHL-W-2.0`。
+
+说人话：
+
+- **可以**学习、复制、修改、制造并销售基于本设计的产品。
+- **如果你分发关节设计本身**（或它的修改版），必须把**该设计**的源码以相同
+  许可公开。
+- **如果你把关节装进更大的产品**——机械臂、四足、云台——你的产品其余部分
+  属于 *External Material*，可以闭源、可以按你自己的条款卖，前提是它只通过
+  文档化接口与本设计结合（输出转接器就是那个接口）。
+- 必须保留声明，包括版权行。
+
+选弱互惠（W）而不是强互惠（S）是刻意的：这个项目的目标是让廉价动力**被用
+起来**，而 S 会迫使每个把关节装进自己机器的人开源整机。W 让关节本身保持开放
+并持续改进，同时让它外围的一切保持自由。
+
+### 第三方组件
+
+- **SimpleFOC**（[arduino-FOC](https://github.com/simplefoc/Arduino-FOC)）是
+  **MIT** 许可。固件基于它构建；按 MIT 要求，其版权声明保留在
+  [`firmware/README.md`](firmware/README.md)。MIT 是宽松许可，不构成冲突。
+- **ESP32-C3 SDK / Arduino core** 相关组件仍按其自身许可。

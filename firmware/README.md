@@ -51,3 +51,28 @@ loop**" — but only **open-loop** firmware was supplied. If a closed-loop
 version exists, it belongs here as `closedloop/`.
 
 See [`../docs/MISSING.md`](../docs/MISSING.md) item 4.
+
+---
+
+## License and third-party attribution
+
+This firmware is part of the repository and is licensed under
+**CERN-OHL-W-2.0** (see [`../LICENSE`](../LICENSE)).
+
+It builds on **SimpleFOC** ([arduino-FOC](https://github.com/simplefoc/Arduino-FOC)):
+
+> SimpleFOC — Copyright (c) the SimpleFOC contributors.
+> Licensed under the **MIT licence**.
+> <https://github.com/simplefoc/Arduino-FOC>
+
+MIT is permissive, so incorporating it into a CERN-OHL-W project is
+straightforward: the only obligation is to retain its copyright notice, which
+is done here and in the header of `openloop/openloop.ino`.
+
+Note that SimpleFOC is MIT, **not** GPL — an earlier draft of this repository
+worried about GPL-3.0 "contamination" of the firmware. That worry was wrong
+and has been removed; it was based on an unverified assumption about
+SimpleFOC's licence, which the repository's own `LICENSE` file settles as MIT.
+
+The Arduino core for ESP32 and the ESP32-C3 SDK remain under their own
+licences (Apache-2.0 / LGPL-2.1 respectively for their components).

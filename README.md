@@ -343,12 +343,33 @@ the repo · open an issue · send a PR.
 
 ## License
 
-**MIT** — see [`LICENSE`](LICENSE).
+**CERN Open Hardware Licence Version 2 – Weakly Reciprocal
+(CERN-OHL-W-2.0)** — full text in [`LICENSE`](LICENSE). SPDX: `CERN-OHL-W-2.0`.
 
-> **TODO(author):** MIT was chosen as a safe default and is **not yet
-> confirmed by you**. For a hardware project you may prefer CERN-OHL-S /
-> CERN-OHL-W (which cover the mechanical and PCB design explicitly rather
-> than treating it all as "software"). Say the word and it will be swapped.
+In plain terms:
+
+- **You may** study, copy, modify, make and sell products from this design.
+- **If you convey the joint design itself** (or a modified version of it), you
+  must make the source for *that design* available under the same licence.
+- **If you build the joint into a larger product** — a robot arm, a quadruped,
+  a pan-tilt head — the rest of your product is *External Material* and may
+  stay closed and be sold under your own terms, provided it only interfaces
+  with this design through the documented interface (the output adapter is
+  exactly that interface).
+- Notices, including the copyright line, must be retained.
+
+Weakly reciprocal was chosen over strongly reciprocal (CERN-OHL-S) on purpose:
+the goal of this project is that cheap actuation gets *used*, and S would force
+anyone embedding the joint to open-source their whole machine. W keeps the
+joint itself open and improving while leaving everything around it free.
+
+### Third-party components
+
+- **SimpleFOC** ([arduino-FOC](https://github.com/simplefoc/Arduino-FOC)) is
+  **MIT**-licensed. The firmware builds on it; its copyright notice is
+  retained in [`firmware/README.md`](firmware/README.md) as MIT requires.
+  MIT is permissive, so this causes no licence conflict.
+- **ESP32-C3 SDK / Arduino core** components remain under their own licences.
 
 ---
 

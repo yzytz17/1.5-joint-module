@@ -1,4 +1,12 @@
 // =====================================================================
+//  Copyright (c) 2026 yzytz17
+//  This source describes Open Hardware and is licensed under the
+//  CERN-OHL-W v2. You may redistribute and modify this source and make
+//  products using it under the terms of the CERN-OHL-W v2.
+//  Source Location: https://github.com/yzytz17/1.5-joint-module
+// =====================================================================
+//
+// =====================================================================
 //  config.h — pin map and tuning constants for the open-loop firmware
 //
 //  !! THIS FILE IS A RECONSTRUCTION, NOT THE AUTHOR'S ORIGINAL !!

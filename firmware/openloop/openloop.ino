@@ -1,4 +1,16 @@
 // =====================================================================
+//  Copyright (c) 2026 yzytz17
+//  This source describes Open Hardware and is licensed under the
+//  CERN-OHL-W v2. You may redistribute and modify this source and make
+//  products using it under the terms of the CERN-OHL-W v2.
+//  Source Location: https://github.com/yzytz17/1.5-joint-module
+//
+//  Builds on SimpleFOC (https://github.com/simplefoc/Arduino-FOC),
+//  copyright (c) the SimpleFOC contributors, MIT licence. Its notice is
+//  retained here as MIT requires.
+// =====================================================================
+//
+// =====================================================================
 //  1503 brushless motor — pure open-loop drive
 //  (ESP32-C3 + SimpleFOC + analog-voltage angle sensor)
 //
