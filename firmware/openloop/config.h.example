@@ -1,0 +1,123 @@
+// =====================================================================
+//  config.h — pin map and tuning constants for the open-loop firmware
+//
+//  !! THIS FILE IS A RECONSTRUCTION, NOT THE AUTHOR'S ORIGINAL !!
+//
+//  The shipped firmware (`openloop.ino`) does `#include "config.h"`, but
+//  config.h was not part of the released material set. Every macro below
+//  was recovered from comments and expressions inside the .ino itself.
+//
+//  Values are marked either:
+//     [DERIVED]  — recovered verbatim from a comment in openloop.ino
+//     [GUESS]    — plausible placeholder, MUST be confirmed before use
+//
+//  To use: copy this file to `config.h` in the same folder and correct
+//  every [GUESS] line.
+// =====================================================================
+
+#pragma once
+
+// ---------------------------------------------------------------------
+// 1. Pin map  — ESP32-C3  [DERIVED]
+//
+//    Phase A -> INHA = GPIO10
+//    Phase B -> INHB = GPIO3
+//    Phase C -> INHC = GPIO2
+//    Enable        = GPIO8
+//    Encoder (analog voltage, ADC) = GPIO0
+//
+//    Note: phase B was originally wired to GPIO7. That pin is faulty on
+//    this board revision, so it was moved to GPIO3. Nothing else changed.
+// ---------------------------------------------------------------------
+#define PIN_INHA        10   // [DERIVED] gate-driver input, motor phase A
+#define PIN_INHB        3    // [DERIVED] gate-driver input, motor phase B (was GPIO7, pin is damaged)
+#define PIN_INHC        2    // [DERIVED] gate-driver input, motor phase C
+#define PIN_EN          8    // [DERIVED] gate-driver enable
+#define PIN_ENC_ANGLE   0    // [DERIVED] ADC input, analog angle sensor (ESP32-C3 ADC1_CH0)
+
+// ---------------------------------------------------------------------
+// 2. Motor  [GUESS]
+//
+//    The drive is a "1503" brushless gimbal motor. Those are very
+//    commonly 12 stator slots / 14 magnets => 7 pole pairs, but this has
+//    NOT been confirmed from the released material.
+//
+//    ACTION REQUIRED: confirm the pole-pair count for the exact motor you
+//    bought. Count the magnets on the rotor bell; pole pairs = magnets/2.
+// ---------------------------------------------------------------------
+#define MOTOR_POLE_PAIRS   7      // [GUESS] TODO(author): confirm
+
+// ---------------------------------------------------------------------
+// 3. Power / voltage ceiling  [DERIVED]
+//
+//    openloop.ino states: 5 V bus, 15 % ceiling, i.e. 0.75 V max output.
+//
+//    !! INCONSISTENCY IN THE ORIGINAL SOURCE !!
+//    The original .ino comments disagree with each other about the ceiling:
+//      - header + driver setup say "5 V x 15 % = 0.75 V"
+//      - the loop() banner and the velocity-mode comment say "10 %"
+//      - a note about the removed current sense says "VOLTAGE_LIMIT (0.5 V)"
+//    The `#define`s are the single source of truth, so pick ONE value here.
+//    15 % is used because it is the value stated where VOLTAGE_LIMIT is
+//    actually assigned. Verify against your own config.h.
+// ---------------------------------------------------------------------
+#define POWER_SUPPLY_VOLTAGE   5.0f                          // [DERIVED] bus voltage, V
+#define VOLTAGE_LIMIT_RATIO    0.15f                         // [DERIVED] output ceiling as a fraction of bus
+#define VOLTAGE_LIMIT          (POWER_SUPPLY_VOLTAGE * VOLTAGE_LIMIT_RATIO)   // [DERIVED] = 0.75 V
+
+// ---------------------------------------------------------------------
+// 4. Open-loop motion limits  [GUESS]
+//
+//    VELOCITY_LIMIT caps how fast the internally integrated electrical
+//    angle is allowed to advance while in open-loop angle mode. It is a
+//    software rate limit, not a measured motor speed.
+// ---------------------------------------------------------------------
+#define VELOCITY_LIMIT         20.0f    // [GUESS] rad/s — TODO(author): confirm
+
+// ---------------------------------------------------------------------
+// 5. Soft-start ramp  [GUESS]
+//
+//    Output voltage slews from 0 V to its target over VOLTAGE_RAMP_MS.
+//    Set to 0 to disable ramping (uq_now jumps straight to target).
+// ---------------------------------------------------------------------
+#define VOLTAGE_RAMP_MS        500      // [GUESS] ms — TODO(author): confirm
+
+// ---------------------------------------------------------------------
+// 6. Angle-mode arrival behaviour  [GUESS]
+//
+//    Open loop has no true position feedback, so "arrival" is decided by
+//    comparing the internally integrated angle to the target.
+//      - within ARRIVE_TOL_RAD  -> drop to VOLTAGE_LIMIT * HOLD_VOLTAGE_RATIO
+//      - outside that window    -> hold full VOLTAGE_LIMIT
+//    Holding at reduced voltage limits how much the motor heats up while
+//    stationary.
+// ---------------------------------------------------------------------
+#define ARRIVE_TOL_RAD         0.05f    // [GUESS] rad (~2.9 deg) — TODO(author): confirm
+#define HOLD_VOLTAGE_RATIO     0.40f    // [GUESS] fraction of VOLTAGE_LIMIT — TODO(author): confirm
+
+// ---------------------------------------------------------------------
+// 7. Direction  [GUESS]
+//
+//    Multiplies both angle and velocity targets so that a positive
+//    command produces the rotation direction you consider "positive".
+//    Use +1 or -1.
+// ---------------------------------------------------------------------
+#define OPENLOOP_DIRECTION     1        // [GUESS] +1 or -1 — TODO(author): confirm
+
+// ---------------------------------------------------------------------
+// 8. Analog angle sensor mapping  [DERIVED]
+//
+//    The encoder outputs an analog voltage with a fixed mapping:
+//      0.0 V -> 0 deg,  3.3 V -> 360 deg
+//    The firmware averages 8 ADC samples per reading for noise rejection
+//    and clamps the result to [ANGLE_V_MIN, ANGLE_V_MAX].
+//
+//    Set ANGLE_MAP_INVERT to 1 to flip the mapping (3.3 V -> 0 deg,
+//    0 V -> 360 deg). Use it if the motor runs the wrong way.
+//
+//    IMPORTANT: in this firmware the encoder is display-only. It is never
+//    linked into the control loop, so it cannot affect commutation.
+// ---------------------------------------------------------------------
+#define ANGLE_V_MIN       0.0f   // [DERIVED] volts at 0 deg
+#define ANGLE_V_MAX       3.3f   // [DERIVED] volts at 360 deg
+#define ANGLE_MAP_INVERT  0      // [DERIVED] 0 = normal, 1 = inverted

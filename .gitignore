@@ -1,0 +1,40 @@
+# --- the real config header is machine-specific; only config.h.example is tracked ---
+config.h
+firmware/**/config.h
+
+# --- firmware build artefacts ---
+*.o
+*.obj
+*.elf
+*.bin
+*.hex
+*.map
+build/
+.pio/
+.pioenvs/
+
+# --- editors ---
+.vscode/
+.idea/
+*.swp
+*~
+*.bak
+*.orig
+
+# --- OS noise ---
+.DS_Store
+Thumbs.db
+desktop.ini
+*.lnk
+
+# --- SolidWorks lock, journal and backup files ---
+~$*.sldprt
+~$*.sldasm
+~$*.SLDPRT
+~$*.SLDASM
+*.SWP
+swxJRNL.swp
+
+# --- slicer scratch output ---
+*.gcode
+*.3mf.tmp

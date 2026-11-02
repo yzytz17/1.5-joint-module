@@ -1,0 +1,55 @@
+# Normalise line endings. The original firmware source is CRLF; the English
+# translation is LF. Storing everything as LF keeps diffs clean across
+# platforms and both forms work fine in the Arduino IDE.
+* text=auto eol=lf
+
+# --- source & docs: text, LF ---
+*.md    text eol=lf
+*.ino   text eol=lf
+*.h     text eol=lf
+*.hpp   text eol=lf
+*.c     text eol=lf
+*.cpp   text eol=lf
+*.json  text eol=lf
+*.txt   text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+.gitignore   text eol=lf
+.gitattributes text eol=lf
+LICENSE      text eol=lf
+
+# --- Gerber / drill: keep byte-exact. These go to a fab; do not let git
+#     touch line endings or encoding. ---
+*.GTL   -text
+*.GBL   -text
+*.GTO   -text
+*.GBO   -text
+*.GTS   -text
+*.GBS   -text
+*.GTP   -text
+*.GBP   -text
+*.GKO   -text
+*.GDL   -text
+*.GDD   -text
+*.G1    -text
+*.G2    -text
+*.DRL   -text
+
+# --- binary: never diff, never normalise ---
+*.STL   binary
+*.stl   binary
+*.SLDPRT binary
+*.SLDASM binary
+*.sldprt binary
+*.sldasm binary
+*.zip   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.mp4   binary
+*.webm  binary
+*.pdf   binary
+*.docx  binary
+*.step  binary
+*.stp   binary
